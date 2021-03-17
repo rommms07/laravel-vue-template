@@ -35,8 +35,6 @@
     "geckodriver": "^1.20.0",
     "tailwindcss": "^2.0.1-compat",
     "typescript": "~3.9.3",
-    "vue-auto-routing": "^1.0.0",
-    "vue-cli-plugin-auto-routing": "~1.2.0",
     "vue-template-compiler": "^2.6.11"
   }
 }
