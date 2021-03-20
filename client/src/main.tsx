@@ -1,17 +1,17 @@
 /** Tailwind */
 import '@/assets/tailwind.pcss';
 
-import Vue from 'vue';
-import store from '@/store';
+import { Vue } from 'vue-property-decorator';
 import router from '@/router';
 
 /** Register the plugins */
 import '@/plugins';
+import '@/components';
 
 Vue.config.productionTip = false;
 
 new Vue({
-  store, router,
+  router,
 
   render() {
     return (<router-view></router-view>)

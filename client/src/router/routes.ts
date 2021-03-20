@@ -10,5 +10,10 @@ export const routes: RouteConfig[] = [
     name: 'profile',
     path: 'auth/profile',
     component: require('@/pages/auth/profile.vue').default,
-  }
+  },
+  {
+    name: 'home',
+    path: '/',
+    component: require('@/pages/index.vue').default
+  },
 ];

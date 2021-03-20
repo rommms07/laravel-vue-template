@@ -9,16 +9,17 @@ class GuestController extends Controller
 {
     public function authenticate(Request $request) {
         $request->validate([
-            'email' => 'required',
+            'email' => 'required|email',
             'password' => 'required'
         ]);
 
         if (Auth::attempt($request->only(['email', 'password']))) {
             $request->session()->regenerate();
-
-            return [];
+            return $request->user();
         }
 
-        return back()->withErrors([]);
+        return response()->json([
+            'message' => 'Invalid provided credentials.'
+        ], 401);
     }
 }

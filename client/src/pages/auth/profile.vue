@@ -1,15 +1,13 @@
 <template>
-  <main class="profile-page h-screen grid justify-items-center mt-20">
-    Hello, world
+  <main class="profile-page h-screen">
+    <v-button>Button</v-button>
   </main>
 </template>
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 
-@Component({
-  layout: 'default-layout'
-})
+@Component
 export default class extends Vue {
 
 }

@@ -1,66 +1,39 @@
 <template>
-  <main class="root-page h-screen grid place-items-center">
-    <form @submit.prevent="attemptLogin" class="flex flex-col">
-      <label>Laravel SPA Login Demo 🔒</label>
-      <fieldset>
-        <input name="email" type="text" placeholder="Username or Email">
-      </fieldset>
-      <fieldset>
-        <input name="password" type="password" placeholder="Password">
-      </fieldset>
-      <input type="submit" value="Sign In">
-    </form>
-    <output v-if="user">
-      Hello, {{ user }}
-    </output>
-  </main>
+  <div class="home-page">
+    <v-alert>Hello, world</v-alert>
+    <v-breadcrumb>
+      <v-breadcrumb-item>Item #1</v-breadcrumb-item>
+      <v-breadcrumb-item>Item #2</v-breadcrumb-item>
+    </v-breadcrumb>
+
+    <v-button></v-button>
+    <v-checkbox></v-checkbox>
+    <v-date-field></v-date-field>
+    <v-dropdown></v-dropdown>
+    <v-listbox></v-listbox>
+    <v-message-box></v-message-box>
+    <v-modal></v-modal>
+    <v-notification></v-notification>
+    <v-pagination></v-pagination>
+    <v-progress></v-progress>
+    <v-radio></v-radio>
+    <v-search-field></v-search-field>
+    <v-slider></v-slider>
+    <v-tag></v-tag>
+    <v-text-field></v-text-field>
+    <v-toggle></v-toggle>
+  </div>
 </template>
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 
-@Component({
-  layout: 'default-layout'
-})
-export default class extends Vue {
-  public user: any | null = null;
+@Component
+export default class ComponentName extends Vue {
 
-  public async attemptLogin(e: Event) {
-    await this.$axios.get('/sanctum/csrf-cookie');
-
-    const credentials = new FormData(e.target as HTMLFormElement);
-
-    await this.$axios.post('/api/guest/login', credentials)
-      .then(({ data }) => console.log(data))
-      .catch(err => console.log(err));
-    
-    this.$axios.get('/api/auth/user')
-      .then(({ data }) => {
-        this.$data.user = data;
-      });
-  }
 }
-</script> 
+</script>
 
-<style lang="postcss" scoped>
-form {
-  @apply w-96 p-4 shadow-lg;
-}
+<style scoped>
 
-form > * {
-  @apply my-1;
-}
-
-form label {
-  @apply text-2xl font-semibold text-gray-800 mb-10;
-}
-
-form input {
-  @apply p-2 outline-none border-2 rounded-md w-full focus:shadow-inner;
-}
-
-form input[type="submit"],
-form input[type="button"] {
-  @apply font-semibold bg-gray-200 text-gray-700;
-}
 </style>
