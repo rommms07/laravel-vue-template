@@ -2,7 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\GuestController;
+use App\Http\Controllers\Auth\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,8 +20,7 @@ use App\Http\Controllers\GuestController;
 Route::middleware('auth:sanctum')->group(function() {
 
     Route::get('/auth/user', fn(Request $request) => $request->user());
-
-
+    Route::put('/auth/logout', [ UserController::class, 'logout' ]);
 
 });
 
