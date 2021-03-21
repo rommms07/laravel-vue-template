@@ -3,7 +3,7 @@
 HAHAHA
 
 ## Prerequisites
-Siguraduhin mo muna na dapat nakainstall ang mga sumusunod packages sa iyong sistema, kung hindi baka kung anong komplikasyon ang mangyari sa ating pagsisimula.
+Siguraduhin mo muna na dapat nakainstall ang mga sumusunod na packages sa iyong sistema, kung hindi baka kung anong komplikasyon ang mangyari sa ating pagsisimula.
 
 - PHP 7.4 + MySQL
 - Composer
@@ -19,7 +19,7 @@ at sa direktoryong `./server` naman ipatupad mo ang `composer install`
 Pagkatapos mong maipatupad ang mga utos na ito sa mga nabangit na direktoryo, lahat ng mga dependencies na kung saan dumidepende ang ating templayte ay makukuha.
 
 ## Post-Installation
-Para sa huli nating pagsasaayos ng ating templayte, siguraduhin mo na dapat naigawa mo ito sa loob ng mga nabanggit na direktoryo (`./client`, `./server`).
+Para sa huli nating pagsasaayos ng ating templayte, siguraduhin mo na dapat naigawa mo ito sa loob ng mga nabanggit na direktoryo (`./client`, `./server`) ang instruksyon na ito.
 
 **Sa loob ng `./client`:**
 
@@ -60,7 +60,7 @@ App\Models\User::factory()->create([
 ```
 
 ## Run
-Execuute the following command in a separate instance of a terminal to start the application;
+Execute the following command in a separate instance of a terminal to start the application;
 
 In `./client`: `npm run serve`
 In `./server`: `php artisan serve` 
