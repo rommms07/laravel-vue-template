@@ -1,12 +1,15 @@
-import { Vue } from 'vue-property-decorator';
-import { vuetify, router } from '@/plugins';
+import { createApp } from 'vue';
+import App from './App.vue';
+import router from './router';
+import './assets/main.css';
 
-/** */
-Vue.config.productionTip = false
+import DashboardLayout from './components/DashboardLayout.vue';
+import EmptyLayout from './components/EmptyLayout.vue';
 
-new Vue({
-  router,
-  vuetify,
-  render: h => h('router-view')
+const app = createApp(App);
 
-}).$mount('#app-root');
+app.component('default-layout', DashboardLayout);
+app.component('empty-layout', EmptyLayout);
+
+app.use(router);
+app.mount('#app');
