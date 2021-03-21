@@ -1,5 +1,7 @@
 # Laravel@Vue SPA Boilerplate
 
+HAHAHA
+
 ## Prerequisites
 Siguraduhin mo muna na dapat nakainstall ang mga sumusunod packages sa iyong sistema, kung hindi baka kung anong komplikasyon ang mangyari sa ating pagsisimula.
 
