@@ -5,9 +5,9 @@ import axios, { AxiosRequestConfig, AxiosInstance } from 'axios';
 import { PluginObject } from 'vue';
 
 export default new class implements PluginObject<AxiosRequestConfig> {
-  public install(_Vue: typeof Vue, options?: AxiosRequestConfig) {
-    const service: AxiosInstance = axios.create(options);
+  private service!: AxiosInstance;
 
+  private addInterceptors(): void {
     interface ErrorResponse {
       message?: string,
       errors?: Array<{ [key: string]: any }>,
@@ -15,7 +15,7 @@ export default new class implements PluginObject<AxiosRequestConfig> {
       statusText?: string
     }
 
-    service.interceptors.response.use(response => response, error => {
+    this.service.interceptors.response.use(response => response, error => {
       const _err: ErrorResponse = {};
 
       if (!error.response) {
@@ -36,7 +36,13 @@ export default new class implements PluginObject<AxiosRequestConfig> {
 
       return Promise.reject(_err);
     });
+  }
 
-    _Vue.prototype.$axios = service;
+  public install(_Vue: typeof Vue, options?: AxiosRequestConfig) {
+    this.service = axios.create(options);
+
+    this.addInterceptors();
+
+    _Vue.prototype.$axios =this.service;
   }
 }

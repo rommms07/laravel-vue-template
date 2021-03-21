@@ -1,10 +1,15 @@
 <template>
   <v-app>
     <v-progress-linear indeterminate v-if="currentProgressBarState"></v-progress-linear>
+
+    <v-app-bar app color="primary" dark>
+      <v-app-bar-title>
+        Laravel
+      </v-app-bar-title>
+    </v-app-bar>
+
     <v-main>
-      <v-container>
-        <router-view></router-view>
-      </v-container>
+      <router-view></router-view>
     </v-main>
   </v-app>
 </template>

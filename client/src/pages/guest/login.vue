@@ -1,6 +1,6 @@
 <template>
-  <div class="home-content">
-    <v-row class="mt-14" v-if="!$route.params.name">
+  <v-container class="home-content">
+    <v-row class="mt-14">
       <v-spacer></v-spacer>
       <v-col lg="5" md="7" sm="8" cols="12">
         <v-form @submit.prevent="attemptUserLogin" class="elevation-4 pa-4 rounded-lg">
@@ -12,16 +12,23 @@
       </v-col>
       <v-spacer></v-spacer>
     </v-row>
-    <v-row v-else>
-      Hello, {{ $route.params.name }}
-    </v-row>
-  </div>
+  </v-container>
 </template>
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 
-@Component
+@Component({
+
+  async created() {
+    this.$axios.get('/api/auth/user')
+      .then(({ data: { email } }) => {
+        if (email) this.$router.push('/about');
+      })
+      .catch(err => console.log(err));
+  }
+  
+})
 export default class extends Vue {
   public async attemptUserLogin(e: UIEvent): Promise<void> {
     this.$store.dispatch('toggleProgressBar');
@@ -32,12 +39,10 @@ export default class extends Vue {
     const credentials = new FormData(e.target as HTMLFormElement);
 
     this.$axios.post('/api/guest/login', credentials)
-      .then(({ data }) => {
-        const { name } = data;
-        
+      .then(() => {
+
         /** Redirect to /user */
-        this.$router.push(`/about/${name.split(' ')[0]?.toLowerCase()}`)
-          .then(() => this.$store.dispatch('toggleProgressBar'));
+        this.$router.push('/about').then(() => this.$store.dispatch('toggleProgressBar'));
       })
       .catch(err => console.log(err));
       

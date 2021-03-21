@@ -1,12 +1,11 @@
 import { Vue } from 'vue-property-decorator';
 import { createRouterLayout } from 'vue-router-layout';
 import Router, { RouteConfig } from 'vue-router';
-
 import routes from 'vue-auto-routing';
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
@@ -17,3 +16,5 @@ export default new Router({
     }
   ]
 });
+
+export default router;

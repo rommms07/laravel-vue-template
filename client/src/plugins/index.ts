@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import _router from '@/router';
+import _router from '@/plugins/router';
 
 import { Vue } from 'vue-property-decorator';
 import { PluginFunction, PluginObject } from 'vue';
