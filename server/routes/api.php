@@ -19,10 +19,14 @@ use App\Http\Controllers\Auth\UserController;
 
 Route::middleware('auth:sanctum')->group(function() {
 
-    Route::get('/auth/user', fn(Request $request) => $request->user());
-    Route::put('/auth/logout', [ UserController::class, 'logout' ]);
+    Route::prefix('auth')->group(function() {
+        Route::get('/user', UserController::class);
+        Route::put('/logout', [ UserController::class, 'logout' ]);
+    });
 
 });
 
-Route::post('/guest/login', [ GuestController::class, 'authenticate' ])
-    ->name('guest:login');
+Route::prefix('guest')->group(function() {
+    Route::post('/login', [ GuestController::class, 'authenticate' ]);
+    Route::post('/register', [ GuestController::class, 'store' ]);
+});

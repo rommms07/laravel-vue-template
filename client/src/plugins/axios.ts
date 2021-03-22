@@ -43,6 +43,6 @@ export default new class implements PluginObject<AxiosRequestConfig> {
 
     this.addInterceptors();
 
-    _Vue.prototype.$axios =this.service;
+    _Vue.prototype.$axios = this.service;
   }
 }

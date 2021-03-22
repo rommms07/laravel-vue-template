@@ -1,20 +1,21 @@
 import { Vue } from 'vue-property-decorator';
 import { createRouterLayout } from 'vue-router-layout';
-import Router, { RouteConfig } from 'vue-router';
-import routes from 'vue-auto-routing';
+import VueRouter from 'vue-router';
 
-Vue.use(Router);
+Vue.use(VueRouter);
 
-const router = new Router({
+import { routes as children } from '@/routes';
+
+export const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/',
+      path: '',
       component: createRouterLayout(layout => import(`@/layouts/${layout}.vue`)),
-      children: routes as RouteConfig[]
+      children
     }
   ]
 });
 
-export default router;
+export default VueRouter;
