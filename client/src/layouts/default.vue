@@ -35,7 +35,9 @@ export default class extends Vue {
 
     try {
       await this.$axios.put('/api/auth/logout');
-      this.$router.replace('/');
+      localStorage.removeItem('user');
+
+      this.$router.replace('/auth/login');
     } catch(error) {
       console.log(error);
     }

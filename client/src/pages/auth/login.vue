@@ -46,12 +46,17 @@ import { Vue, Component } from 'vue-property-decorator';
 @Component
 export default class AuthLoginPage extends Vue {
   public async onAttemptLogin(e: UIEvent): Promise<void> {
+    await this.$axios.get('/sanctum/csrf-cookie');
+    
     this.$store.dispatch('toggleProgressBar');
 
     const credentials = new FormData(e.target as HTMLFormElement);
 
     try {
-      await this.$axios.post('/api/guest/login', credentials);
+      const { data: user } = await this.$axios.post('/api/guest/login', credentials);
+
+      localStorage.setItem('user', JSON.stringify(user));
+
       this.$router.replace('/admin');
     } catch(error) {
       console.log(error);
