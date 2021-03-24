@@ -1,0 +1,69 @@
+version: "3.7"
+services:
+  # Client configuration
+  #
+  app_client:
+    build: 
+      context: ./client
+      dockerfile: Dockerfile
+    image: example.io/client:test
+    ports:
+      - 8080:8080
+    container_name: client
+    restart: unless-stopped
+    networks: 
+      - laravel-vue-template 
+
+  # Server configuration
+  #
+  app_server:
+    build:
+      args:
+        USER: admin
+        UID: 1000
+      context: ./server
+      dockerfile: Dockerfile
+    image: example.io/server:test
+    container_name: server
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - ./server:/var/www
+    networks:
+      - laravel-vue-template
+
+  db:
+    image: mysql:5.7
+    container_name: db
+    restart: unless-stopped
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_DATABASE: server
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: admin
+      MYSQL_USER: admin
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - ./server/database/schema:/docker-entrypoint-initdb.d
+    depends_on:
+      - app_server
+    networks:
+      - laravel-vue-template
+
+  nginx:
+    image: nginx:1.17-alpine
+    container_name: nginx
+    restart: unless-stopped
+    ports:
+      - 8000:80
+    volumes:
+      - ./server:/var/www
+      - ./nginx:/etc/nginx/conf.d
+    networks:
+      - laravel-vue-template
+
+networks:
+  laravel-vue-template:
+    driver: bridge
